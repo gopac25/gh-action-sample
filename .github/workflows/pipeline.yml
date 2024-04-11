@@ -1,0 +1,45 @@
+name: Deploy application
+
+on:
+  push:
+    branches: 
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  check-files:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    outputs:
+      change: ${{ steps.changes.outputs.change }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: changes
+      with:
+        filters: |
+          wom: 'wom/**'
+          ill: 'ill/**'
+
+  wom:
+    needs: check-files
+    if: needs.check-files.outputs.change.wom == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+    - run: echo "hello wom"
+
+  ill:
+    needs: check-files
+    if: needs.check-files.outputs.change.ill == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+    - run: echo "hello ill"
