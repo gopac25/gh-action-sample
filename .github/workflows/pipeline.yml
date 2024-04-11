@@ -13,8 +13,6 @@ jobs:
     permissions:
       contents: 'read'
       id-token: 'write'
-    outputs:
-      change: ${{ steps.changes.outputs.change }}
     steps:
     - uses: actions/checkout@v4
     - uses: dorny/paths-filter@v3
@@ -26,7 +24,7 @@ jobs:
 
   wom:
     needs: check-files
-    if: needs.check-files.outputs.change.wom == 'true'
+    if: needs.changes.outputs.wom == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
@@ -36,7 +34,7 @@ jobs:
 
   ill:
     needs: check-files
-    if: needs.check-files.outputs.change.ill == 'true'
+    if: needs.changes.outputs.wom == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
