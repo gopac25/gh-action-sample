@@ -23,13 +23,11 @@ jobs:
           ill: 'ill/**'
     - name: wom
       if: steps.changes.outputs.wom == 'true'
-      uses: ./.github/workflows/template.yml
+      uses: ./.github/template/
       with:
         service_name: wom
-        environment: stage
     - name: ill
       if: steps.changes.outputs.ill == 'true'
-      uses: ./.github/workflows/template.yml
+      uses: ./.github/template/
       with:
         service_name: ill
-        environment: stage
