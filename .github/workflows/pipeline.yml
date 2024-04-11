@@ -8,13 +8,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-files:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
       id-token: 'write'
-    outputs:
-      output: ${{ steps.changes.outputs }}
     steps:
     - uses: actions/checkout@v4
     - uses: dorny/paths-filter@v3
@@ -23,23 +21,9 @@ jobs:
         filters: |
           wom: 'wom/**'
           ill: 'ill/**'
-
-  wom:
-    needs: check-files
-    if: needs.check-files.outputs.output.wom == 'true'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-    steps:
-    - run: echo "hello wom"
-
-  ill:
-    needs: check-files
-    if: needs.check-files.outputs.output.wom == 'true'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-    steps:
-    - run: echo "hello ill"
+    - name: wom
+      if: steps.changes.outputs.wom == 'true'
+      uses: actions/checkout@v4
+    - name: Run packages/utils tests
+      if: steps.changes.outputs.ill == 'true'
+      uses: actions/checkout@v4
