@@ -20,8 +20,9 @@ jobs:
       id-token: 'write'
     strategy:
       matrix:
-        service_name: ['${{ inputs.service_name }}']
+        service_name: [ '${{ inputs.service_name }}' ]
     steps:
+    - uses: actions/checkout@v4
     - name: stage
       uses: ./.github/template/
       with:
