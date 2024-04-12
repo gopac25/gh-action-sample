@@ -1,0 +1,12 @@
+name: Manual App Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      service_name:
+        description: 'Service Names'
+        required: true
+        type: choice
+        options:
+        - wom
+        - ill
