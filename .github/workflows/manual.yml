@@ -10,3 +10,19 @@ on:
         options:
         - wom
         - ill
+        - wom, ill
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    strategy:
+      matrix:
+        service_name: ['${{ inputs.service_name }}']
+    steps:
+    - name: stage
+      uses: ./.github/template/
+      with:
+        service_name: ${{ matrix.service_name }}
