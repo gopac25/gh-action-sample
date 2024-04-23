@@ -20,7 +20,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: branch name
-      run: echo Branch name ${{ github.ref_name }}
+      run: |
+           branch=$(echo ${{ github.ref }}  | cut --complement -d "/" -f 1-2)
+           echo $branch
+           echo Branch name ${{ github.ref_name }}
     - name: stage
       uses: ./.github/template/
       with:
