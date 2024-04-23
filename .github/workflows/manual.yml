@@ -8,9 +8,8 @@ on:
         required: true
         type: choice
         options:
-        - '["wom"]'
-        - '["ill"]'
-        - '["wom, ill"]'
+        - wom
+        - ill
 
 jobs:
   deploy:
@@ -18,12 +17,9 @@ jobs:
     permissions:
       contents: 'read'
       id-token: 'write'
-    strategy:
-      matrix:
-        service_name: ${{ fromJSON(github.event.inputs.service_name)}}
     steps:
     - uses: actions/checkout@v4
     - name: stage
       uses: ./.github/template/
       with:
-        service_name: ${{ matrix.service_name }}
+        service_name: ${{ inputs.service_name }}
