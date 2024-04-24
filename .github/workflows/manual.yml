@@ -19,6 +19,15 @@ jobs:
       id-token: 'write'
     steps:
     - uses: actions/checkout@v4
+    - name: branch name
+      run: |
+           branch=$(echo ${{ github.ref }}  | cut --complement -d "/" -f 1-2)
+           echo $branch
+           echo Branch name ${{ github.ref_name }}
+           app_name=$(echo "${{ github.ref_name }}" | sed 's/\//-/g')
+           echo $app_name
+           application_name=$(echo "${{ github.ref_name }}" | sed -E 's/^(feature|fix|hotfix)\/(.*)/\2/')
+           echo $application_name
     - name: stage
       uses: ./.github/template/
       with:
