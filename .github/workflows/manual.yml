@@ -24,6 +24,8 @@ jobs:
            branch=$(echo ${{ github.ref }}  | cut --complement -d "/" -f 1-2)
            echo $branch
            echo Branch name ${{ github.ref_name }}
+           app_name=$(echo "${{ github.ref_name }}" | sed 's/\//-/g')
+           echo $app_name
     - name: stage
       uses: ./.github/template/
       with:
