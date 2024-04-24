@@ -26,6 +26,8 @@ jobs:
            echo Branch name ${{ github.ref_name }}
            app_name=$(echo "${{ github.ref_name }}" | sed 's/\//-/g')
            echo $app_name
+           application_name=$(echo "${{ github.ref_name }}" | sed -E 's/^(feature|fix|hotfix)\/(.*)/\2/')
+           echo $application_name
     - name: stage
       uses: ./.github/template/
       with:
