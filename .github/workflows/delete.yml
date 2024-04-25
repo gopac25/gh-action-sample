@@ -16,11 +16,9 @@ jobs:
   
       - name: Get Git Branches
         run: |
-             git branch -a --format='%(refname:short)' > branches.txt
-             sed -i 's|origin/||g' branches.txt
-      
-      - name: Print
-        run: cat branches.txt | sed -E 's/^(feature|fix|hotfix)\/(.*)/\2/' > branch.txt
+             git branch -a --format='%(refname:short)' > all_branches.txt
+             sed -i 's|origin/||g; s/main//g' all_branches.txt
+             cat all_branches.txt | sed -E 's/^(feature|fix|hotfix)\/(.*)/\2/' > branches.txt
         
       - name: Print
-        run: cat branch.txt
+        run: cat branches.txt
