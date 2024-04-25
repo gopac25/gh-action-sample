@@ -16,7 +16,7 @@ jobs:
   
       - name: Get Git Branches
         run: |
-             git for-each-ref --format='%(refname:short)' refs/heads/ > branches.txt
+             git branch -a --format='%(refname:short)' > branches.txt
       
       - name: Print
         run: cat branches.txt
