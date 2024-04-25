@@ -1,0 +1,19 @@
+name: delete
+
+on:
+  workflow_dispatch:
+
+jobs:
+  delete-unused-cloud-run-sandbox:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - uses: actions/checkout@v4
+  
+      - name: Get Git Branches
+        run: git branch --format='%(refname:short)' > branches.txt
+      
+      - name: Print
+        run: cat branches.txt
