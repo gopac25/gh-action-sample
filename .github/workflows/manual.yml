@@ -21,6 +21,10 @@ jobs:
     - uses: actions/checkout@v4
     - name: branch name
       run: |
+           echo "app_name=$(echo "${{ github.ref_name }}" | sed -E 's/^(feature|fix|hotfix)\/(.*)/\2/')" >> "$GITHUB_ENV"
+           echo $app_name
+    - name: branch name
+      run: |
            branch=$(echo ${{ github.ref }}  | cut --complement -d "/" -f 1-2)
            echo $branch
            echo Branch name ${{ github.ref_name }}
