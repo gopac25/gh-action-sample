@@ -11,9 +11,12 @@ jobs:
       id-token: 'write'
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Fetch all branches
+        run: git fetch --all
   
       - name: Get Git Branches
-        run: git branch -a --format='%(refname:short)' > branches.txt
+        run: git branch --format='%(refname:short)' > branches.txt
       
       - name: Print
         run: cat branches.txt
