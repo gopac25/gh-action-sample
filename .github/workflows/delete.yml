@@ -18,6 +18,7 @@ jobs:
         run: |
              git branch -a --format='%(refname:short)' > branches.txt
              sed -i 's|origin/||g' branches.txt
+             sed -E 's/^(feature|fix|hotfix)\/(.*)/\2/') branches.txt
       
       - name: Print
         run: cat branches.txt
