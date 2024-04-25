@@ -17,6 +17,7 @@ jobs:
       - name: Get Git Branches
         run: |
              git branch -a --format='%(refname:short)' > branches.txt
+             sed -i 's|origin/||g' branches.txt
       
       - name: Print
         run: cat branches.txt
