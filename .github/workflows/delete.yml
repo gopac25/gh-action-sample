@@ -16,7 +16,9 @@ jobs:
         run: git fetch --all
   
       - name: Get Git Branches
-        run: git for-each-ref --format='%(refname:short)' refs/ > branches.txt
+        run: |
+             git for-each-ref --format='%(refname:short)' refs/heads/ > branches.txt
+             sed -i 's|refs/heads/||g' branches.txt
       
       - name: Print
         run: cat branches.txt
