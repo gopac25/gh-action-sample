@@ -22,11 +22,11 @@ jobs:
     - name: env name branch
       run: |
            echo "app_name=$(echo "${{ github.ref_name }}" | sed -E 's/^(feature|fix|hotfix)\/(.*)/\2/')" >> "$GITHUB_ENV"
-           echo ${{ env.app_name }}
     - name: branch name
       run: |
            branch=$(echo ${{ github.ref }}  | cut --complement -d "/" -f 1-2)
            echo $branch
+           echo ${{ env.app_name }}
     - name: stage
       uses: ./.github/template/
       with:
